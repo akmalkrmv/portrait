@@ -1,7 +1,8 @@
 export enum ImageFilterType {
   grey = 1,
   invert = 2,
-  blackWhite = 3
+  blackWhite = 3,
+  lessPixels = 4
 }
 
 /**
@@ -11,7 +12,8 @@ export class ImageFilter {
   private readonly filterMap = {
     [ImageFilterType.grey]: this.applyGrey,
     [ImageFilterType.invert]: this.applyInvertColor,
-    [ImageFilterType.blackWhite]: this.applyBlackWhite
+    [ImageFilterType.blackWhite]: this.applyBlackWhite,
+    [ImageFilterType.lessPixels]: this.applyLessPixels
   };
 
   /**
@@ -84,6 +86,22 @@ export class ImageFilter {
       filtered[i] = ligthness;
       filtered[i + 1] = ligthness;
       filtered[i + 2] = ligthness;
+    }
+
+    this.imageData.data.set(filtered);
+
+    return this;
+  }
+
+  public applyLessPixels(): ImageFilter {
+    let pixelData = this.imageData.data;
+    let filtered = new Uint8ClampedArray(this.imageData.data);
+
+    for (let i = 0; i < pixelData.length; i += 4) {
+      if (Math.random() > 0.5) {
+        // alpha
+        filtered[i + 3] = 0;
+      }
     }
 
     this.imageData.data.set(filtered);
