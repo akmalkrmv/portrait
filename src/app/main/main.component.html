@@ -67,12 +67,12 @@
 
   <div class="image-filters-result">
     <div>
-      <canvas #canvas></canvas>
-      <p *ngIf="image && image.src">Filtered</p>
-    </div>
-    <div>
       <img #image />
       <p *ngIf="image && image.src">Original</p>
+    </div>
+    <div>
+      <canvas #canvas></canvas>
+      <p *ngIf="image && image.src">Filtered</p>
     </div>
   </div>
 

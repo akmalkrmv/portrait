@@ -38,7 +38,7 @@
 .image-filters-result {
   display: flex;
   justify-content: space-evenly;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
 
   & > div {
     display: flex;
