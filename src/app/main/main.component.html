@@ -1,0 +1,77 @@
+<div class="main-wrapper">
+  <div class="controls">
+    <div class="move-controls">
+      <mat-form-field>
+        <mat-label>Speed</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="speed"
+          [(ngModel)]="moveSpeed"
+          (change)="resetMovement()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Distance</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="distance"
+          [(ngModel)]="moveDistance"
+          (change)="resetMovement()"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="resetMovement()">
+        Start moving
+      </button>
+      <button mat-raised-button color="primary" (click)="stopMovement()">
+        Stop moving
+      </button>
+    </div>
+
+    <div class="image-controls">
+      <mat-form-field>
+        <mat-label>Filters</mat-label>
+        <mat-select [(ngModel)]="filters" multiple>
+          <mat-option [value]="0">Grey</mat-option>
+          <mat-option [value]="1">Invert</mat-option>
+          <mat-option [value]="2">Black-white</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label></mat-label>
+        <input matInput style="display: none;" />
+        <input
+          type="file"
+          placeholder="image"
+          (change)="handleFileInput($event.target.files)"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="applyFilters()">
+        Apply filters
+      </button>
+    </div>
+  </div>
+
+  <div class="image-filters-container">
+    <img #image />
+    <canvas #canvas></canvas>
+  </div>
+
+  <!-- <div
+    class="image-container"
+    [style.width]="imageWidth + 'px'"
+    [style.height]="imageHeight + 'px'"
+  >
+    <div
+      class="particle"
+      *ngFor="let particle of particles"
+      [style.top]="particle.y + 'px'"
+      [style.left]="particle.x + 'px'"
+      [style.background-color]="particle.color"
+      [style.transition-duration]="moveSpeed + 'px'"
+    ></div>
+  </div> -->
+</div>

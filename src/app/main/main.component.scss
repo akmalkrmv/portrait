@@ -1,0 +1,69 @@
+.main-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.controls {
+  padding: 10px 20px 0;
+  background-color: white;
+}
+
+.image-container {
+  margin: 20px auto;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #999;
+  position: relative;
+}
+
+.image-filters-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.particle {
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  position: absolute;
+  background-color: white;
+  transition-property: all;
+  transition-timing-function: ease;
+  transition-duration: 0.3s;
+}
+
+.horizontal-move {
+  animation-name: horizontalMove;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+.vertical-move {
+  animation-name: verticalMove;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes horizontalMove {
+  from {
+    transform: translateX(0em);
+  }
+  50% {
+    transform: translateX(3em);
+  }
+  to {
+    transform: translateX(0em);
+  }
+}
+
+@keyframes verticalMove {
+  from {
+    transform: translateY(0em);
+  }
+  50% {
+    transform: translateY(3em);
+  }
+  to {
+    transform: translateY(0em);
+  }
+}
