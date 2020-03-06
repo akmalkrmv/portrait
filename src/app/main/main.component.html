@@ -1,6 +1,6 @@
 <div class="main-wrapper">
   <div class="controls">
-    <div class="move-controls">
+    <!-- <div class="move-controls">
       <mat-form-field>
         <mat-label>Speed</mat-label>
         <input
@@ -28,36 +28,42 @@
       <button mat-raised-button color="primary" (click)="stopMovement()">
         Stop moving
       </button>
-    </div>
+    </div> -->
 
     <div class="image-controls">
-      <mat-form-field>
-        <mat-label>Filters</mat-label>
-        <mat-select [(ngModel)]="filters" multiple>
-          <mat-option [value]="0">Grey</mat-option>
-          <mat-option [value]="1">Invert</mat-option>
-          <mat-option [value]="2">Black-white</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label></mat-label>
-        <input matInput style="display: none;" />
+      <div>
         <input
           type="file"
           placeholder="image"
           (change)="handleFileInput($event.target.files)"
         />
-      </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Filters</mat-label>
+          <mat-select [(ngModel)]="filters" multiple>
+            <mat-option [value]="1">Grey</mat-option>
+            <mat-option [value]="2">Invert</mat-option>
+            <mat-option [value]="3">Black-white</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="applyFilters()">
-        Apply filters
-      </button>
+        <button mat-raised-button color="primary" (click)="applyFilters()">
+          Apply filters
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="image-filters-container">
-    <img #image />
-    <canvas #canvas></canvas>
+  <div class="image-filters-result">
+    <div>
+      <img #image />
+      <p>Original</p>
+    </div>
+    <div>
+      <canvas #canvas></canvas>
+      <p>Filtered</p>
+    </div>
   </div>
 
   <!-- <div

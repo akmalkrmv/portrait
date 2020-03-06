@@ -86,10 +86,8 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   public applyFilters() {
-    const { width, height } = this.image;
-    const imageData = this.context.getImageData(0, 0, width, height);
-
-    let filter = new ImageFilter(imageData).applyFilters(this.filters);
+    const imageData = this.particlesService.getImageData(this.image);
+    const filter = new ImageFilter(imageData).applyFilters(this.filters);
 
     this.context.putImageData(filter.imageData, 0, 0);
   }

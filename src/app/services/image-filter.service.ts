@@ -1,7 +1,7 @@
 export enum ImageFilterType {
-  grey = 0,
-  invert = 1,
-  blackWhite = 2
+  grey = 1,
+  invert = 2,
+  blackWhite = 3
 }
 
 /**
