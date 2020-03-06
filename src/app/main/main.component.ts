@@ -33,6 +33,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   public imageHeight = window.innerHeight;
 
   private moveInterval;
+  private noiseInterval;
 
   public constructor(private particlesService: ParticlesService) {}
 
@@ -73,6 +74,23 @@ export class MainComponent implements OnInit, AfterViewInit {
     clearInterval(this.moveInterval);
   }
 
+  public applyNoise() {
+    this.noiseInterval = setInterval(() => {
+      const imageData = this.particlesService.getImageData(this.image);
+      const filter = new ImageFilter(imageData).applyFilters([
+        ...this.filters,
+        ImageFilterType.noise
+      ]);
+
+      this.context.putImageData(filter.imageData, 0, 0);
+    }, 100);
+  }
+
+  public stopNoise() {
+    clearInterval(this.noiseInterval);
+    this.applyFilters();
+  }
+
   public handleFileInput(files: FileList) {
     const file = files[0];
     const reader = new FileReader();
@@ -88,7 +106,6 @@ export class MainComponent implements OnInit, AfterViewInit {
   public applyFilters() {
     const imageData = this.particlesService.getImageData(this.image);
     const filter = new ImageFilter(imageData).applyFilters(this.filters);
-
     this.context.putImageData(filter.imageData, 0, 0);
   }
 

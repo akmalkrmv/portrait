@@ -2,7 +2,7 @@ export enum ImageFilterType {
   grey = 1,
   invert = 2,
   blackWhite = 3,
-  lessPixels = 4
+  noise = 4
 }
 
 /**
@@ -13,7 +13,7 @@ export class ImageFilter {
     [ImageFilterType.grey]: this.applyGrey,
     [ImageFilterType.invert]: this.applyInvertColor,
     [ImageFilterType.blackWhite]: this.applyBlackWhite,
-    [ImageFilterType.lessPixels]: this.applyLessPixels
+    [ImageFilterType.noise]: this.applyNoise
   };
 
   /**
@@ -93,12 +93,12 @@ export class ImageFilter {
     return this;
   }
 
-  public applyLessPixels(): ImageFilter {
+  public applyNoise(pixelsRarety: number = 0.8): ImageFilter {
     let pixelData = this.imageData.data;
     let filtered = new Uint8ClampedArray(this.imageData.data);
 
     for (let i = 0; i < pixelData.length; i += 4) {
-      if (Math.random() > 0.5) {
+      if (Math.random() > pixelsRarety) {
         // alpha
         filtered[i + 3] = 0;
       }

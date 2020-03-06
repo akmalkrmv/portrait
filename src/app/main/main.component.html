@@ -45,12 +45,19 @@
             <mat-option [value]="1">Grey</mat-option>
             <mat-option [value]="2">Invert</mat-option>
             <mat-option [value]="3">Black-white</mat-option>
-            <mat-option [value]="4">Less pixels</mat-option>
+            <mat-option [value]="4">Noise</mat-option>
           </mat-select>
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="applyFilters()">
           Apply filters
+        </button>
+
+        <button mat-raised-button color="primary" (click)="applyNoise()">
+          Noise
+        </button>
+        <button mat-raised-button (click)="stopNoise()">
+          Stop noise
         </button>
       </div>
     </div>
