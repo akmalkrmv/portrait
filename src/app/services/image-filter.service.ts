@@ -54,7 +54,7 @@ export class ImageFilter {
         pixelData[i + 2]
       );
 
-      if (ligthness < 127.5) {
+      if (ligthness > 127.5) {
         filtered[i] = 255;
         filtered[i + 1] = 255;
         filtered[i + 2] = 255;
