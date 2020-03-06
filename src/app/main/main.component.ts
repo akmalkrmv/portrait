@@ -63,6 +63,7 @@ export class MainComponent implements OnInit, AfterViewInit {
       this.canvas.width = image.width;
       this.canvas.height = image.height;
       this.context.drawImage(image, 0, 0, image.width, image.height);
+      this.applyFilters();
     };
   }
 
@@ -72,6 +73,11 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   public stopMovement() {
     clearInterval(this.moveInterval);
+  }
+
+  public clearFilters() {
+    this.filters = [];
+    this.applyFilters();
   }
 
   public applyNoise() {
@@ -93,14 +99,13 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   public handleFileInput(files: FileList) {
     const file = files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = (readerData: ProgressEvent<FileReader>) => {
-      console.log(readerData);
-    };
-
-    reader.readAsArrayBuffer(file);
     this.image.src = URL.createObjectURL(file);
+
+    // const reader = new FileReader();
+    // reader.onloadend = (readerData: ProgressEvent<FileReader>) => {
+    //   console.log(readerData);
+    // };
+    // reader.readAsArrayBuffer(file);
   }
 
   public applyFilters() {

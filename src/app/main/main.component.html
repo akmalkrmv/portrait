@@ -43,7 +43,7 @@
       <div>
         <mat-form-field>
           <mat-label>Filters</mat-label>
-          <mat-select [(ngModel)]="filters" multiple>
+          <mat-select [(ngModel)]="filters" multiple (selectionChange)="applyFilters()">
             <mat-option [value]="1">Grey</mat-option>
             <mat-option [value]="2">Invert</mat-option>
             <mat-option [value]="3">Black-white</mat-option>
