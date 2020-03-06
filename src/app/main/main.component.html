@@ -55,14 +55,14 @@
     </div>
   </div>
 
-  <div class="image-filters-result" *ngIf="image && image.src">
+  <div class="image-filters-result">
     <div>
       <img #image />
-      <p>Original</p>
+      <p *ngIf="image && image.src">Original</p>
     </div>
     <div>
       <canvas #canvas></canvas>
-      <p>Filtered</p>
+      <p *ngIf="image && image.src">Filtered</p>
     </div>
   </div>
 
