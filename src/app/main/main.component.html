@@ -55,7 +55,7 @@
     </div>
   </div>
 
-  <div class="image-filters-result">
+  <div class="image-filters-result" *ngIf="image && image.src">
     <div>
       <img #image />
       <p>Original</p>
