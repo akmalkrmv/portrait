@@ -22,7 +22,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   public canvas: HTMLCanvasElement;
   public context: CanvasRenderingContext2D;
 
-  public filters: Array<ImageFilterType> = [];
+  public filters: Array<ImageFilterType> = [ImageFilterType.grey];
   public particles: Array<Particle> = [];
   public particlesCount: number = 100;
 
