@@ -6,14 +6,21 @@ import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSliderModule } from "@angular/material/slider";
 // App
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { MainComponent } from "./main/main.component";
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from "./not-found/not-found.component";
+import { ParticlesComponent } from "./particles/particles.component";
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    MainComponent,
+    NotFoundComponent,
+    ParticlesComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -22,6 +29,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatSliderModule,
     // App
     AppRoutingModule
   ],

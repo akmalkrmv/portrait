@@ -40,20 +40,20 @@
           (change)="handleFileInput($event.target.files)"
         />
       </div>
+      <hr />
       <div>
         <mat-form-field>
           <mat-label>Filters</mat-label>
-          <mat-select [(ngModel)]="filters" multiple (selectionChange)="applyFilters()">
-            <mat-option [value]="1">Grey</mat-option>
-            <mat-option [value]="2">Invert</mat-option>
-            <mat-option [value]="3">Black-white</mat-option>
-            <mat-option [value]="4">Noise</mat-option>
+          <mat-select
+            multiple
+            [(ngModel)]="filters"
+            (selectionChange)="applyFilters()"
+          >
+            <mat-option [value]="type.id" *ngFor="let type of filterTypes">{{
+              type.name
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
-
-        <button mat-raised-button color="primary" (click)="applyFilters()">
-          Apply filters
-        </button>
 
         <button mat-raised-button color="primary" (click)="applyNoise()">
           Start noise
@@ -61,6 +61,54 @@
         <button mat-raised-button (click)="stopNoise()">
           Stop noise
         </button>
+      </div>
+      <hr />  
+      <div>
+        <mat-form-field>
+          <mat-label>Brightness</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            max="255"
+            placeholder="brightness"
+            [(ngModel)]="brightness"
+            (change)="applyFilters()"
+          />
+        </mat-form-field>
+        <mat-slider
+          min="0"
+          max="255"
+          color="primary"
+          placeholder="brightness"
+          [thumbLabel]="true"
+          [(ngModel)]="brightness"
+          (change)="applyFilters()"
+        ></mat-slider>
+      </div>
+      <hr />
+      <div>
+        <mat-form-field>
+          <mat-label>Difference</mat-label>
+          <input
+            matInput
+            type="number"
+            min="1"
+            max="20"
+            placeholder="difference"
+            [(ngModel)]="diff"
+            (change)="applyFilters()"
+          />
+        </mat-form-field>
+        <mat-slider
+          min="1"
+          max="20"
+          color="primary"
+          placeholder="difference"
+          [thumbLabel]="true"
+          [(ngModel)]="diff"
+          (change)="applyFilters()"
+        ></mat-slider>
       </div>
     </div>
   </div>

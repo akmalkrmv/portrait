@@ -6,8 +6,9 @@ import {
   ElementRef
 } from "@angular/core";
 import { Particle } from "../models/particle.model";
+import { ImageFilterType, ImageFilterTypes } from "../models/filter-type.model";
 import { ParticlesService } from "../services/particles.service";
-import { ImageFilter, ImageFilterType } from "../services/image-filter.service";
+import { ImageFilter } from "../services/image-filter.service";
 
 @Component({
   selector: "app-main",
@@ -22,12 +23,15 @@ export class MainComponent implements OnInit, AfterViewInit {
   public canvas: HTMLCanvasElement;
   public context: CanvasRenderingContext2D;
 
-  public filters: Array<ImageFilterType> = [ImageFilterType.grey];
+  public filterTypes = ImageFilterTypes;
+  public filters: Array<ImageFilterType> = [];
   public particles: Array<Particle> = [];
   public particlesCount: number = 100;
 
   public moveSpeed = 100;
   public moveDistance = 10;
+  public brightness = 125;
+  public diff = 10;
 
   public imageWidth = window.innerWidth;
   public imageHeight = window.innerHeight;
@@ -49,6 +53,7 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.image = this.imageRef.nativeElement;
     this.canvas = this.canvasRef.nativeElement;
     this.context = this.canvasRef.nativeElement.getContext("2d");
+    this.context.imageSmoothingEnabled = false;
 
     let image = this.image;
     image.onload = data => {
@@ -72,7 +77,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   public stopMovement() {
-    clearInterval(this.moveInterval);
+    cancelAnimationFrame(this.moveInterval);
   }
 
   public clearFilters() {
@@ -81,19 +86,23 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   public applyNoise() {
-    this.noiseInterval = setInterval(() => {
+    cancelAnimationFrame(this.noiseInterval);
+
+    this.noiseInterval = requestAnimationFrame(() => {
       const imageData = this.particlesService.getImageData(this.image);
-      const filter = new ImageFilter(imageData).applyFilters([
-        ...this.filters,
-        ImageFilterType.noise
-      ]);
+      const filter = new ImageFilter(imageData).applyFilters(
+        [...this.filters, ImageFilterType.noise],
+        this.filterOptions()
+      );
 
       this.context.putImageData(filter.imageData, 0, 0);
-    }, 100);
+
+      this.applyNoise();
+    });
   }
 
   public stopNoise() {
-    clearInterval(this.noiseInterval);
+    cancelAnimationFrame(this.noiseInterval);
     this.applyFilters();
   }
 
@@ -110,15 +119,18 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   public applyFilters() {
     const imageData = this.particlesService.getImageData(this.image);
-    const filter = new ImageFilter(imageData).applyFilters(this.filters);
+    const filter = new ImageFilter(imageData).applyFilters(
+      this.filters,
+      this.filterOptions()
+    );
     this.context.putImageData(filter.imageData, 0, 0);
   }
 
   public moveParticles(particles: Particle[], distance: number) {
-    clearInterval(this.moveInterval);
+    cancelAnimationFrame(this.moveInterval);
 
     let intevalTime = this.moveSpeed - 100;
-    this.moveInterval = setInterval(() => {
+    this.moveInterval = requestAnimationFrame(() => {
       for (let i = 0; i < particles.length; i++) {
         let xDistance = (Math.random() - 0.5) * distance;
         let yDistance = (Math.random() - 0.5) * distance;
@@ -131,6 +143,15 @@ export class MainComponent implements OnInit, AfterViewInit {
           particles[i].y -= yDistance;
         }, intevalTime / 2);
       }
-    }, intevalTime);
+
+      this.moveParticles(particles, distance);
+    });
+  }
+
+  private filterOptions() {
+    return {
+      brightness: this.brightness,
+      diff: this.diff
+    };
   }
 }
