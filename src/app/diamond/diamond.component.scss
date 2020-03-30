@@ -1,0 +1,86 @@
+$diamond-info-size: 40px;
+
+.content {
+  display: flex;
+  height: 100%;
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 100px;
+    color: white;
+    background-color: #339;
+    z-index: 1;
+    font-size: large;
+  }
+
+  .wrapper {
+    padding: 20px;
+    width: 100%;
+
+    .header {
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: large;
+
+      .diamonds-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .diamond {
+          width: $diamond-info-size;
+          height: $diamond-info-size;
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+        }
+
+        .diamond-count {
+          margin-left: 6px;
+          margin-right: 40px;
+        }
+      }
+    }
+  }
+
+  .necklaces-wrapper {
+    min-height: 100px;
+    border: 1px solid green;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    // flex-wrap: wrap;
+    overflow: auto;
+
+    // .necklaces {
+    //   display: flex;
+    // }
+  }
+
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .cdk-drop-list-dragging :not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .status {
+    text-align: center;
+    min-height: 40px;
+  }
+}

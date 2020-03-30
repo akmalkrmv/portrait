@@ -1,0 +1,22 @@
+<div class="necklace">
+  <div class="block">
+    <div class="rope"></div>
+  </div>
+
+  <ng-container
+    *ngFor="let diamond of necklace.diamonds; index as i; last as isLast"
+  >
+    <div class="block">
+      <div class="diamond" [style.backgroundColor]="diamond.color">
+        {{ diamond.name }}
+      </div>
+    </div>
+    <div class="block" *ngIf="!isLast" (click)="cut(i)">
+      <div class="rope"></div>
+    </div>
+  </ng-container>
+
+  <div class="block">
+    <div class="rope"></div>
+  </div>
+</div>

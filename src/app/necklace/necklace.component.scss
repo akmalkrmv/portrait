@@ -1,0 +1,64 @@
+$rope-size: 4px;
+$rope-width: 10px;
+$rope-color: #aaa;
+
+$diamond-min-size: 30px;
+$diamond-max-size: 120px;
+
+.necklace {
+  flex-grow: 1;
+  padding: 20px 0;
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  // border: 1px solid orange;
+  cursor: pointer;
+
+  &:hover {
+    border-color: red;
+  }
+
+  .rope {
+    background-color: $rope-color;
+    height: $rope-size;
+    width: $rope-width;
+  }
+
+  .block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .diamond {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+
+      min-width: $diamond-min-size;
+      min-height: $diamond-min-size;
+      max-width: $diamond-max-size;
+      max-height: $diamond-max-size;
+
+      user-select: none;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      cursor: pointer;
+    }
+
+    &:first-child .rope,
+    &:last-child .rope {
+      width: 10px;
+    }
+
+    &:not(:first-child):not(:last-child):hover .rope {
+      cursor: col-resize;
+      background-color: orange;
+    }
+  }
+}

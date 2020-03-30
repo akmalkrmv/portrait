@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 // Material
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
@@ -13,18 +14,23 @@ import { AppComponent } from "./app.component";
 import { MainComponent } from "./main/main.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { ParticlesComponent } from "./particles/particles.component";
+import { DiamondComponent } from "./diamond/diamond.component";
+import { NecklaceComponent } from "./necklace/necklace.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     NotFoundComponent,
-    ParticlesComponent
+    ParticlesComponent,
+    DiamondComponent,
+    NecklaceComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    DragDropModule,
     // Material
     MatInputModule,
     MatButtonModule,

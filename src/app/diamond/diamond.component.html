@@ -1,0 +1,70 @@
+<div class="content">
+  <div class="sidebar">
+    <div>
+      <div *ngFor="let diamond of cat">
+        {{ diamond.name }}
+        <b [style.color]="getCorrectColor(diamond)">{{ diamond.count }}</b>
+      </div>
+    </div>
+    <div>
+      <div *ngFor="let diamond of dog">
+        {{ diamond.name }}
+        <b [style.color]="getCorrectColor(diamond)">{{ diamond.count }}</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper" cdkDropListGroup>
+    <div class="header">
+      <div class="diamonds-info">
+        <ng-container *ngFor="let item of availableDiamonds">
+          <div class="diamond" [style.backgroundColor]="item.diamond.color">
+            {{ item.diamond.name }}
+          </div>
+          <div class="diamond-count">{{ item.count }}</div>
+        </ng-container>
+      </div>
+      <div class="cuts-info">Cuts: {{ cuts }}</div>
+    </div>
+
+    <ng-container *ngFor="let collection of allNecklaces">
+      <div
+        cdkDropList
+        class="necklaces-wrapper"
+        cdkDropListOrientation="horizontal"
+        [cdkDropListData]="collection"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <app-necklace
+          class="necklaces"
+          cdkDrag
+          cdkDragLockAxis="y"
+          *ngFor="let necklace of collection"
+          [necklace]="necklace"
+          (onCut)="cutNecklace($event.necklace, $event.index)"
+        ></app-necklace>
+      </div>
+    </ng-container>
+
+    <div class="status">
+      <h1 *ngIf="isOver">Done!</h1>
+    </div>
+
+    <div class="controls">
+      <div>
+        <button mat-raised-button (click)="prev()">Prev</button>
+      </div>
+      <div>
+        <button mat-raised-button (click)="restart()">Restart</button>
+        <button
+          *ngIf="isOver"
+          mat-raised-button
+          color="primary"
+          (click)="next()"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
